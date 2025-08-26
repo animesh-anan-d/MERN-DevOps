@@ -1,0 +1,32 @@
+---
+- name: Install and configure Prometheus
+  hosts: webservers
+  become: yes
+
+  tasks:
+    - name: Install Prometheus
+      yum:
+        name: prometheus
+        state: present
+
+    - name: Configure Prometheus to scrape Node.js backend metrics
+      copy:
+        dest: /etc/prometheus/prometheus.yml
+        content: |
+          global:
+            scrape_interval: 15s
+          scrape_configs:
+            - job_name: 'nodejs-backend'
+              static_configs:
+                - targets: ['localhost:3000']  # backend API metrics
+            - job_name: 'mongodb'
+              static_configs:
+                - targets: ['10.0.1.251:9216']  # MongoDB exporter
+      notify:
+        - Restart Prometheus
+
+  handlers:
+    - name: Restart Prometheus
+      systemd:
+        name: prometheus
+        state: restarted

@@ -1,0 +1,66 @@
+---
+- name: Setup Web Server (MERN App)
+  hosts: webservers
+  become: yes
+
+  vars:
+    app_repo: "https://github.com/UnpredictablePrashant/TravelMemory.git"
+    app_dir: "/home/ec2-user/TravelMemory"
+
+  tasks:
+    - name: Update and upgrade packages
+      yum:
+        name: "*"
+        state: latest
+
+    - name: Install Node.js and NPM
+      shell: |
+        curl -fsSL https://rpm.nodesource.com/setup_18.x | bash -
+        yum install -y nodejs
+      args:
+        executable: /bin/bash
+
+    - name: Clone the TravelMemory repository
+      git:
+        repo: "{{ app_repo }}"
+        dest: "{{ app_dir }}"
+        version: main
+
+    - name: Install backend dependencies
+      npm:
+        path: "{{ app_dir }}/backend"
+        state: present
+
+    - name: Install frontend dependencies
+      npm:
+        path: "{{ app_dir }}/frontend"
+        state: present
+
+    - name: Copy .env file
+      copy:
+        src: files/.env
+        dest: "{{ app_dir }}/backend/.env"
+        owner: ec2-user
+        group: ec2-user
+        mode: '0600'
+
+    - name: Start backend
+      shell: "nohup node {{ app_dir }}/backend/app.js &"
+      args:
+        chdir: "{{ app_dir }}/backend"
+
+    - name: Start frontend
+      shell: "nohup npm start &"
+      args:
+        chdir: "{{ app_dir }}/frontend"
+
+    - name: Install Prometheus and Node Exporter
+      yum:
+        name: prometheus,node_exporter,grafana
+        state: present
+
+    - name: Enable and start Grafana
+      systemd:
+        name: grafana-server
+        state: started
+        enabled: yes

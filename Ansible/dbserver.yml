@@ -1,0 +1,44 @@
+---
+- name: Setup Database Server (MongoDB)
+  hosts: dbservers
+  become: yes
+
+  tasks:
+    - name: Update and upgrade packages
+      yum:
+        name: "*"
+        state: latest
+
+    - name: Install MongoDB
+      yum:
+        name: mongodb-org
+        state: present
+
+    - name: Start MongoDB service
+      systemd:
+        name: mongod
+        state: started
+        enabled: yes
+
+    - name: Configure MongoDB to allow remote access
+      lineinfile:
+        path: /etc/mongod.conf
+        regexp: '^bindIp:'
+        line: 'bindIp: 0.0.0.0'
+        state: present
+        backrefs: yes
+      notify:
+        - Restart MongoDB
+
+    - name: Create application database and user
+      shell: |
+        mongo <<EOF
+        use travelmemory
+        db.createUser({user: "appuser", pwd: "apppassword", roles:[{role:"readWrite", db:"travelmemory"}]})
+        EOF
+
+  handlers:
+    - name: Restart MongoDB
+      systemd:
+        name: mongod
+        state: restarted
