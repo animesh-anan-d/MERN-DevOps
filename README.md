@@ -139,7 +139,3 @@ Solution: Fixed Prometheus datasource URL in Grafana and ensured correct port ma
 Issue: EC2 instances running out of memory during load testing.
 
 Solution: Increased instance type from t2.medium to t2.la
-
-
-#SCREENSHOTS-------------
-![alt text](<Screenshot 2025-08-25 162434.png>) ![alt text](<Screenshot 2025-08-26 172005.png>) ![alt text](<Screenshot 2025-08-26 172202.png>) ![alt text](<Screenshot 2025-08-26 173520.png>) ![alt text](<Screenshot 2025-08-26 174203.png>) ![alt text](<Screenshot 2025-08-26 174253.png>) ![alt text](<Screenshot 2025-08-26 174622.png>) ![alt text](<Screenshot 2025-08-26 174802.png>) ![alt text](<Screenshot 2025-08-26 180146.png>) ![alt text](<Screenshot 2025-08-26 180242.png>) ![alt text](<Screenshot 2025-08-26 183011.png>) ![alt text](<Screenshot 2025-08-26 183053.png>) ![alt text](<Screenshot 2025-08-26 184152.png>) ![alt text](<Screenshot 2025-08-26 185740.png>) ![alt text](<Screenshot 2025-08-26 185903.png>) ![alt text](<Screenshot 2025-08-26 190039.png>) ![alt text](<Screenshot 2025-08-26 190110.png>) ![alt text](<Screenshot 2025-08-26 190145.png>) ![alt text](<Screenshot 2025-08-26 190510.png>) ![alt text](<Screenshot 2025-08-26 191054.png>) ![alt text](<Screenshot 2025-08-26 201617.png>) ![alt text](<Screenshot 2025-08-26 202450.png>)

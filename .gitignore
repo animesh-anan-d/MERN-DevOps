@@ -138,3 +138,9 @@ crash.log
 crash.log.*
 .vscode/
 .DS_Store
+
+# Terraform local state and provider cache
+.terraform/
+*.tfstate
+*.tfstate.*
+crash.log
