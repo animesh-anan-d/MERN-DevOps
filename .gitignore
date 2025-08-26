@@ -128,5 +128,3 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
-backend/grafana-10.4.2-1.x86_64.rpm
-backend/grafana-10.4.2-1.x86_64.rpm
