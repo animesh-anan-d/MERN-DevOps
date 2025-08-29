@@ -1,6 +1,5 @@
 # End-to-End MERN Application Deployment and Monitoring
 
-## Part 4: Documentation & Reporting
 
 ### 1. Terraform and Ansible Setup
 
@@ -14,9 +13,6 @@ terraform/
 ├── outputs.tf
 └── provider.tf
 
-markdown
-Copy
-Edit
 - **Steps performed:**
 1. Configured AWS provider with access keys.
 2. Created EC2 instances (`mern-1` and `mern-2`) for application deployment.
@@ -30,9 +26,6 @@ Edit
 mern-1 ansible_host=<IP1> ansible_user=ec2-user
 mern-2 ansible_host=<IP2> ansible_user=ec2-user
 
-diff
-Copy
-Edit
 - Playbooks used:
 ansible/
 ├── install_node.yml # Install Node.js and dependencies
@@ -41,9 +34,7 @@ ansible/
 ├── setup_mongodb.yml # Configure MongoDB Atlas connection
 └── setup_prometheus.yml # Install and configure Prometheus
 
-markdown
-Copy
-Edit
+
 - **Deployment steps:**
 1. Installed required packages and Node.js.
 2. Pulled application code from GitHub repository.
